@@ -99,14 +99,7 @@ gulp.task('scripts', function() {
 		'bower_components/jquery/dist/jquery.min.js',
 		// 'bower_components/bootstrap/dist/js/bootstrap.bundle.min.js',
 		'bower_components/fancybox/dist/jquery.fancybox.min.js',
-		// 'bower_components/jcf/dist/js/jcf.js',
-		// 'bower_components/jcf/dist/js/jcf.select.js',
-		// 'bower_components/air-datepicker/dist/js/datepicker.min.js',
-		// 'bower_components/datatables.net/js/jquery.dataTables.min.js',
-		// 'bower_components/jquery-bar-rating/dist/jquery.barrating.min.js',
-		// 'bower_components/inputmask/dist/jquery.inputmask.min.js',
-		// 'bower_components/responsive-tabs/js/jquery.responsiveTabs.min.js',
-		// 'bower_components/sticky-sidebar/src/sticky-sidebar.js',
+		'bower_components/owl.carousel/dist/owl.carousel.min.js',
 		])
 		// .pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
 		// .pipe(uglify()) // Сжимаем JS файл
@@ -118,27 +111,23 @@ gulp.task('scripts', function() {
 gulp.task('css-libs', ['sass'], function() {
 	return gulp.src([ // Берем все необходимые библиотеки
 		'bower_components/fancybox/dist/jquery.fancybox.min.css',
-		// 'bower_components/jcf/dist/css/theme-minimal/jcf.css',
-		// 'bower_components/air-datepicker/dist/css/datepicker.min.css',
-		// 'bower_components/datatables.net-dt/css/jquery.dataTables.min.css',
-		// 'bower_components/jquery-bar-rating/dist/themes/bootstrap-stars.css',
-		// 'node_modules/@fortawesome/fontawesome-pro/css/all.min.css',
-		// 'bower_components/responsive-tabs/css/responsive-tabs.css',
+		'bower_components/owl.carousel/dist/assets/owl.carousel.min.css',
+		'bower_components/owl.carousel/dist/assets/owl.theme.default.min.css',
 		
 		])
 		.pipe(sourcemaps.init())
 		.pipe(cssnano())
 		.pipe(concat('libs.min.css'))
-		.pipe(sourcemaps.write(''))
+		// .pipe(sourcemaps.write(''))
 		.pipe(gulp.dest('app/css/'));
 });
 
 gulp.task('sass', function(){ // Создаем таск Sass
 	return gulp.src('app/sass/**/*.scss') // Берем источник
 		.pipe(sourcemaps.init())
-		.pipe(sass({outputStyle: 'compact'}).on('error', sass.logError)) // Преобразуем Sass в CSS посредством gulp-sass
+		.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError)) // Преобразуем Sass в CSS посредством gulp-sass
 		.pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7','iOS >= 9'], { cascade: true })) // Создаем префиксы
-		.pipe(sourcemaps.write(''))
+		// .pipe(sourcemaps.write(''))
 		.pipe(gulp.dest('app/css')) // Выгружаем результата в папку app/css
 		.pipe(browserSync.reload({stream: true})) // Обновляем CSS на странице при изменении
 });
